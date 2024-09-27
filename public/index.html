@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipExtract.com: Download Instagram Reels, Short Clips, and Videos | Free Online Tool</title>
+    <meta name="description" content="Free online tool to download Instagram Reels, short clips, and videos from YouTube, TikTok, and more. No ads, no watermarks, instant downloads for all your favorite short videos.">
+    <meta name="keywords" content="Instagram reels download, short clips downloader, short video download, TikTok video saver, YouTube shorts downloader, social media video downloader">
+    <meta name="author" content="ClipExtract.com">
+    <link rel="canonical" href="https://www.ClipExtract.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ClipExtract.com">
+    <meta property="og:title" content="Download Instagram Reels and Short Videos | ClipExtract.com">
+    <meta property="og:description" content="Free tool to download Instagram Reels, short clips, and videos from popular social media platforms. No registration required.">
+    <meta property="og:image" content="https://www.ClipExtract.com/path-to-your-logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.ClipExtract.com">
+    <meta property="twitter:title" content="Download Instagram Reels and Short Videos | ClipExtract.com">
+    <meta property="twitter:description" content="Free tool to download Instagram Reels, short clips, and videos from popular social media platforms. No registration required.">
+    <meta property="twitter:image" content="https://www.ClipExtract.com/path-to-your-logo.png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .logo .highlight {
+            color: #0066cc;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+        }
+        .container {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .download-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .supported-platforms {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0d9488;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0f766e;
+        }
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .how-to-use, .faq {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0d9488;
+        }
+        .footer {
+            background-color: #f8f8f8;
+            border-top: 1px solid #e0e0e0;
+            padding: 1rem 5%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .footer p {
+            margin: 0.5rem 0;
+        }
+        .footer-links {
+            margin-top: 10px;
+        }
+        .footer-links a {
+            color: #0d9488;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            display: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">ClipExtract<span class="highlight">.com</span></div>
+    </header>
+
+    <div class="container">
+        <h1>Download Instagram Reels, Short Clips, and Videos</h1>
+        <div class="download-section">
+            <p class="supported-platforms">
+                Download short videos from Instagram Reels, YouTube Shorts, TikTok, Facebook, Twitter, and more!
+            </p>
+            <form id="downloadForm">
+                <input type="url" id="videoUrl" placeholder="Paste Instagram Reel or short video URL here" required>
+                <button type="submit" id="downloadButton">
+                    <span id="buttonSpinner" class="spinner"></span>
+                    <span id="buttonText">Download Short Video</span>
+                </button>
+            </form>
+            <div id="message"></div>
+        </div>
+
+        <div class="how-to-use">
+            <h2>How to Download Instagram Reels and Short Videos</h2>
+            <ol>
+                <li>Copy the URL of the Instagram Reel or short video you want to download.</li>
+                <li>Paste the URL into the input field above.</li>
+                <li>Click the "Download Short Video" button.</li>
+                <li>Wait for your Instagram Reel or short clip to download.</li>
+            </ol>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions about Downloading Short Videos</h2>
+            <h3>Can I download Instagram Reels for free?</h3>
+            <p>Yes, ClipExtract.com allows you to download Instagram Reels and other short videos completely free of charge, with no registration required.</p>
+            
+            <h3>What types of short videos can I download?</h3>
+            <p>ClipExtract.com supports downloading short videos from various platforms, including Instagram Reels, TikTok videos, YouTube Shorts, and short clips from Facebook, Twitter, and more.</p>
+            
+            <h3>Is it legal to download short videos and Instagram Reels?</h3>
+            <p>ClipExtract.com is designed for personal use only. Always ensure you have the right to download and use the content, and respect copyright laws and terms of service for each platform when downloading short videos or Instagram Reels.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>ClipExtract.com is not affiliated with Instagram, TikTok, YouTube, or any other social media platform. We do not host any media on our servers. All short videos and Instagram Reels are delivered through their original sources and belong to their respective owners.</p>
+        <p>&copy; 2020-24 ClipExtract.com - All Rights Reserved. The #1 tool for downloading Instagram Reels and short videos.</p>
+        <div class="footer-links">
+            <a href="#" id="privacyPolicy">Privacy Policy</a>
+            <a href="#" id="termsConditions">Terms & Conditions</a>
+            <a href="#" id="contactUs">Contact Us</a>
+        </div>
+    </footer>
+
+    <!-- Modal for Privacy Policy -->
+    <div id="privacyPolicyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div id="privacyPolicyContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Terms & Conditions -->
+    <div id="termsConditionsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Terms & Conditions</h2>
+            <div id="termsConditionsContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Contact Us -->
+    <div id="contactUsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Contact Us</h2>
+            <div id="contactUsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Existing download functionality
+        document.getElementById('downloadForm').addEventListener('submit', async function(e) {
+              e.preventDefault();
+            const videoUrl = document.getElementById('videoUrl').value;
+            const button = document.getElementById('downloadButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const messageDiv = document.getElementById('message');
+
+            // Input validation
+            const urlPatterns = {
+                instagram: /^https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/[\w-]+\/?/,
+                youtube: /^https?:\/\/(www\.)?(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)[\w-]+/,
+                facebook: /^https?:\/\/(www\.)?(facebook\.com|fb\.watch)\/.*?(\/videos\/|\/watch\/?\?v=)?\d+/,
+                tiktok: /^https?:\/\/(www\.|vm\.)?tiktok\.com\/(@[\w.-]+\/video\/\d+|\w+\/?)/,
+                twitter: /^https?:\/\/(www\.)?twitter\.com\/\w+\/status\/\d+/,
+                vimeo: /^https?:\/\/(www\.)?vimeo\.com\/\d+/,
+                dailymotion: /^https?:\/\/(www\.)?dailymotion\.com\/video\/\w+/,
+                twitch: /^https?:\/\/(www\.)?twitch\.tv\/\w+(\/clip\/\w+)?/,
+                linkedin: /^https?:\/\/(www\.)?linkedin\.com\/(posts|video)\/.*$/
+            };
+
+            let matchedPlatform = null;
+            for (const [platform, pattern] of Object.entries(urlPatterns)) {
+                if (pattern.test(videoUrl)) {
+                    matchedPlatform = platform;
+                    break;
+                }
+            }
+
+            if (!matchedPlatform) {
+                messageDiv.textContent = 'Error: Please enter a valid video URL from a supported platform.';
+                return;
+            }
+
+            button.disabled = true;
+            buttonText.textContent = 'Downloading...';
+            buttonSpinner.style.display = 'inline-block';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('http://localhost:8000/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: videoUrl }),
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const downloadUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = downloadUrl;
+                    const contentDisposition = response.headers.get('Content-Disposition');
+                    let filename = 'video.mp4';
+                    if (contentDisposition) {
+                        const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        const matches = filenameRegex.exec(contentDisposition);
+                        if (matches != null && matches[1]) {
+                            filename = matches[1].replace(/['"]/g, '');
+                        }
+                    }
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(downloadUrl);
+                    messageDiv.textContent = 'Download complete!';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Download failed');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                if (error.message === 'Failed to fetch') {
+                    messageDiv.textContent = 'Error: Unable to connect to the server. Please check your internet connection and try again.';
+                } else {
+                    messageDiv.textContent = 'Error: ' + error.message;
+                }
+            } finally {
+                button.disabled = false;
+                buttonText.textContent = 'Download';
+                buttonSpinner.style.display = 'none';
+            }
+        });
+
+        // Modal functionality
+        function setupModal(modalId, linkId, content) {
+            var modal = document.getElementById(modalId);
+            var link = document.getElementById(linkId);
+            var span = modal.getElementsByClassName("close")[0];
+            var contentDiv = modal.getElementsByTagName('div')[1];
+
+            link.onclick = function() {
+                modal.style.display = "block";
+                contentDiv.innerHTML = content;
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        // Privacy Policy Content
+        var privacyPolicyContent = `
+            <h3>Privacy Policy for ClipExtract.com</h3>
+            <p>Privacy Policy for ClipExtract.com
+At ClipExtract.com, accessible from https://ClipExtract.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by   ClipExtract.com and how we use it.
+
+If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.
+
+This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in ClipExtract.com. This policy is not applicable to any information collected offline or via channels other than this website.
+
+Consent
+By using our website, you hereby consent to our Privacy Policy and agree to its terms.
+
+Information we collect
+The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.
+
+If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.
+
+When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.
+
+How we use your information
+We use the information we collect in various ways, including to:
+
+Provide, operate, and maintain our website
+Improve, personalize, and expand our website
+Understand and analyze how you use our website
+Develop new products, services, features, and functionality
+ Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the website, and for marketing and promotional purposes
+Send you emails
+Find and prevent fraud
+Log Files
+ClipExtract.com follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users movement on the website, and gathering demographic information.
+
+Cookies and Web Beacons
+Like any other website, ClipExtract.com uses cookies. These cookies are used to store information including visitors preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users experience by customizing our web page content based on visitors browser type and/or other information.
+
+Google DoubleClick DART Cookie
+Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – https://policies.google.com/technologies/ads
+
+Our Advertising Partners
+Some of advertisers on our site may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below.
+
+Google
+
+https://policies.google.com/technologies/ads
+
+Advertising Partners Privacy Policies
+You may consult this list to find the Privacy Policy for each of the advertising partners of ClipExtract.com.
+
+Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on ClipExtract.com, which are sent directly to users browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.
+
+Note that ClipExtract.com has no access to or control over these cookies that are used by third-party advertisers.
+
+Third Party Privacy Policies
+ClipExtract's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.
+
+You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers respective websites.
+
+CCPA Privacy Rights (Do Not Sell My Personal Information)
+Under the CCPA, among other rights, California consumers have the right to:
+
+Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.
+
+Request that a business delete any personal data about the consumer that a business has collected.
+
+Request that a business that sells a consumer's personal data, not sell the consumer's personal data.
+
+If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.
+
+GDPR Data Protection Rights
+We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:
+
+The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.
+
+The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.
+
+The right to erasure – You have the right to request that we erase your personal data, under certain conditions.
+
+The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.
+
+The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.
+
+The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.
+
+If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.
+
+Children's Information
+Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.
+
+ClipExtract.com does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.
+
+Changes to This Privacy Policy
+We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately, after they are posted on this page.
+
+Contact Us
+If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.
+</p>
+            <!-- Add the rest of the privacy policy content here -->
+        `;
+
+        // Terms & Conditions Content
+        var termsConditionsContent = `
+            <h3>Welcome to ClipExtract.com!</h3>
+            <p>Welcome to ClipExtract.com!
+
+These terms and conditions outline the rules and regulations for the use of ClipExtract.com's Website, located at https://ClipExtract.com.
+
+By accessing this website we assume you accept these terms and conditions. Do not continue to use ClipExtract.com if you do not agree to take all of the terms and conditions stated on this page.
+
+The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: Client, You and Your refers to you, the person log on this website and compliant to the Company's terms and conditions. 'The Company', 'Ourselves', 'We', 'Our' and 'Us', refers to our Company. 'Party', 'Parties', or 'Us', refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, in accordance with and subject to, prevailing law of in. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.
+
+Cookies
+We employ the use of cookies. By accessing ClipExtract.com, you agreed to use cookies in agreement with the ClipExtract.com's Privacy Policy.
+
+Most interactive websites use cookies to let us retrieve the user's details for each visit. Cookies are used by our website to enable the functionality of certain areas to make it easier for people visiting our website. Some of our affiliate/advertising partners may also use cookies.
+
+License
+Unless otherwise stated,   ClipExtract.com and/or its licensors own the intellectual property rights for all material on   ClipExtract.com. All intellectual property rights are reserved. You may access this from   ClipExtract.com for your own personal use subjected to restrictions set in these terms and conditions.
+
+You must not:
+
+Republish material from   ClipExtract.com
+Sell, rent or sub-license material from   ClipExtract.com
+Reproduce, duplicate or copy material from   ClipExtract.com
+Redistribute content from   ClipExtract.com
+Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website.   ClipExtract.com does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of   ClipExtract.com,its agents and/or affiliates. Comments reflect the views and opinions of the person who post their views and opinions. To the extent permitted by applicable laws,   ClipExtract.com shall not be liable for the Comments or for any liability, damages or expenses caused and/or suffered as a result of any use of and/or posting of and/or appearance of the Comments on this website.
+
+  ClipExtract.com reserves the right to monitor all Comments and to remove any Comments which can be considered inappropriate, offensive or causes breach of these Terms and Conditions.
+
+You warrant and represent that:
+
+You are entitled to post the Comments on our website and have all necessary licenses and consents to do so;
+The Comments do not invade any intellectual property right, including without limitation copyright, patent or trademark of any third party;
+The Comments do not contain any defamatory, libelous, offensive, indecent or otherwise unlawful material which is an invasion of privacy
+The Comments will not be used to solicit or promote business or custom or present commercial activities or unlawful activity.
+You hereby grant   ClipExtract.com a non-exclusive license to use, reproduce, edit and authorize others to use, reproduce and edit any of your Comments in any and all forms, formats or media.
+
+Hyperlinking to our Content
+The following organizations may link to our Website without prior written approval:
+
+Government agencies;
+ Search engines;
+News organizations;
+Online directory distributors may link to our Website in the same manner as they hyperlink to the Websites of other listed businesses; and
+System wide Accredited Businesses except soliciting non-profit organizations, charity shopping malls, and charity fundraising groups which may not hyperlink to our Web site.
+These organizations may link to our  home page, to publications or to other Website information so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products and/or services; and (c) fits within the context of the linking party's site.
+
+We may consider and approve other link requests from the following types of organizations:
+
+commonly-known consumer and/or business information sources;
+dot.com community sites;
+associations or other groups representing charities;
+online directory distributors;
+internet portals;
+accounting, law and consulting firms; and
+educational institutions and trade associations.
+We will approve link requests from these organizations if we decide that: (a) the link would not make us look unfavorably to ourselves or to our accredited businesses; (b) the organization does not have any negative records with us; (c) the benefit to us from the visibility of the hyperlink compensates the absence of   ClipExtract.com; and (d) the link is in the context of general resource information.
+
+These organizations may link to our home page so long as the link: (a) is not in any way deceptive; (b) does not falsely imply sponsorship, endorsement or approval of the linking party and its products or services; and (c) fits within the context of the linking party's site.
+
+If you are one of the organizations listed in paragraph 2 above and are interested in linking to our website, you must inform us by sending an e-mail to   ClipExtract.com. Please include your name, your organization name, contact information as well as the URL of your site, a list of any URLs from which you intend to link to our Website, and a list of the URLs on our site to which you would like to link. Wait 2-3 weeks for a response.
+
+Approved organizations may hyperlink to our Website as follows:
+
+By use of our corporate name; or
+By use of the uniform resource locator being linked to; or
+By use of any other description of our Website being linked to that makes sense within the context and format of content on the linking party's site.
+No use of   ClipExtract.com's logo or other artwork will be allowed for linking absent a trademark license agreement.
+
+iFrames
+Without prior approval and written permission, you may not create frames around our Webpages that alter in any way the visual presentation or appearance of our Website.
+
+Content Liability
+We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website. No link(s) should appear on any Website that may be interpreted as libelous, obscene or criminal, or which infringes, otherwise violates, or advocates the infringement or other violation of, any third party rights.
+
+Reservation of Rights
+We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it's linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.
+
+Removal of links from our website
+If you find any link on our Website that is offensive for any reason, you are free to contact and inform us any moment. We will consider requests to remove links but we are not obligated to or so or to respond to you directly.
+
+We do not ensure that the information on this website is correct, we do not warrant its completeness or accuracy; nor do we promise to ensure that the website remains available or that the material on the website is kept up to date.
+
+Disclaimer
+To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website. Nothing in this disclaimer will:
+
+limit or exclude our or your liability for death or personal injury;
+limit or exclude our or your liability for fraud or fraudulent misrepresentation;
+limit any of our or your liabilities in any way that is not permitted under applicable law; or
+exclude any of our or your liabilities that may not be excluded under applicable law.
+The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.
+
+As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.
+</p>
+            <!-- Add the rest of the terms and conditions content here -->
+        `;
+
+        // Contact Us Content
+        var contactUsContent = `
+            <h3>Reach To Us</h3>
+            <p>if you have any query regarding our website contact us at: contact@ClipExtract.com</p>
+        `;
+
+        // Setup modals
+        setupModal("privacyPolicyModal", "privacyPolicy", privacyPolicyContent);
+        setupModal("termsConditionsModal", "termsConditions", termsConditionsContent);
+        setupModal("contactUsModal", "contactUs", contactUsContent);
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ClipExtract.com - Instagram Reels and Short Video Downloader",
+      "url": "https://www.ClipExtract.com",
+      "description": "Free online tool to download Instagram Reels, short clips, and videos from various social media platforms.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "featureList": [
+        "Instagram Reels download",
+        "TikTok video download",
+        "YouTube Shorts download",
+        "Short video clips from various platforms"
+      ]
+    }
+    </script>
+</body>
+</html>
