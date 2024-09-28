@@ -1,22 +1,20 @@
-# File: app.py
-
-from fastapi import FastAPI, HTTPException, BackgroundTasks
-from fastapi.responses import StreamingResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, HttpUrl, validator
 import yt_dlp
 import os
 import tempfile
-import shutil
 import re
 import unicodedata
-from typing import Generator
+from typing import Dict, Any
+from mangum import Mangum
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Adjust this in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,28 +39,18 @@ def sanitize_filename(filename: str) -> str:
     filename = re.sub(r'[^\w\-.]', '_', filename)
     return filename if filename else 'video'
 
-def generate_file(filename: str) -> Generator[bytes, None, None]:
-    with open(filename, 'rb') as f:
-        while True:
-            chunk = f.read(8192)
-            if not chunk:
-                break
-            yield chunk
-
-def cleanup(temp_dir: str):
-    shutil.rmtree(temp_dir, ignore_errors=True)
-    
-@app.get("/")
+@app.get("/api")
 async def root():
     return {"message": "Application is running"}
-    
-@app.post("/download")
-async def download_video(request: DownloadRequest, background_tasks: BackgroundTasks):
-    temp_dir = tempfile.mkdtemp()
+
+@app.post("/api/download")
+async def download_video(request: Request) -> Dict[str, Any]:
     try:
+        data = await request.json()
+        download_request = DownloadRequest(url=data['url'])
+        
         ydl_opts = {
             'format': 'best',
-            'outtmpl': os.path.join(temp_dir, '%(title)s.%(ext)s'),
             'postprocessors': [{
                 'key': 'FFmpegVideoConvertor',
                 'preferedformat': 'mp4',
@@ -70,26 +58,18 @@ async def download_video(request: DownloadRequest, background_tasks: BackgroundT
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(str(request.url), download=True)
+            info = ydl.extract_info(str(download_request.url), download=False)
             video_title = sanitize_filename(info['title'])
-            filename = ydl.prepare_filename(info)
-            if not filename.endswith('.mp4'):
-                new_filename = os.path.splitext(filename)[0] + '.mp4'
-                os.rename(filename, new_filename)
-                filename = new_filename
-        
-        background_tasks.add_task(cleanup, temp_dir)
-        
-        return StreamingResponse(
-            generate_file(filename),
-            media_type="video/mp4",
-            headers={
-                "Content-Disposition": f"attachment; filename={video_title}.mp4"
-            }
-        )
+            video_url = info['url']
+            
+            return JSONResponse(content={
+                "title": video_title,
+                "url": video_url
+            })
     except Exception as e:
-        cleanup(temp_dir)
-        raise HTTPException(status_code=400, detail=str(e))
+        return JSONResponse(status_code=400, content={"error": str(e)})
+
+handler = Mangum(app)
 
 # if __name__ == "__main__":
 #     import uvicorn

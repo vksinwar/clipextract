@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipExtract.com: Download Instagram Reels, Short Clips, and Videos | Free Online Tool</title>
+    <meta name="description" content="Free online tool to download Instagram Reels, short clips, and videos from YouTube, TikTok, and more. No ads, no watermarks, instant downloads for all your favorite short videos.">
+    <meta name="keywords" content="Instagram reels download, short clips downloader, short video download, TikTok video saver, YouTube shorts downloader, social media video downloader">
+    <meta name="author" content="ClipExtract.com">
+    <link rel="canonical" href="https://www.ClipExtract.com">
+    
+    <!-- Open Graph  / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ClipExtract.com">
+    <meta property="og:title" content="Download Instagram Reels and Short Videos | ClipExtract.com">
+    <meta property="og:description" content="Free tool to download Instagram Reels, short clips, and videos from popular social media platforms. No registration required.">
+    <meta property="og:image" content="https://www.ClipExtract.com/path-to-your-logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.ClipExtract.com">
+    <meta property="twitter:title" content="Download Instagram Reels and Short Videos | ClipExtract.com">
+    <meta property="twitter:description" content="Free tool to download Instagram Reels, short clips, and videos from popular social media platforms. No registration required.">
+    <meta property="twitter:image" content="https://www.ClipExtract.com/path-to-your-logo.png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .logo .highlight {
+            color: #0066cc;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+        }
+        .container {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .download-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .supported-platforms {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0d9488;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0f766e;
+        }
+        button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .how-to-use, .faq {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #0d9488;
+        }
+        .footer {
+            background-color: #f8f8f8;
+            border-top: 1px solid #e0e0e0;
+            padding: 1rem 5%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .footer p {
+            margin: 0.5rem 0;
+        }
+        .footer-links {
+            margin-top: 10px;
+        }
+        .footer-links a {
+            color: #0d9488;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+            display: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">ClipExtract<span class="highlight">.com</span></div>
+    </header>
+
+    <div class="container">
+        <h1>Download Instagram Reels, Short Clips, and Videos</h1>
+        <div class="download-section">
+            <p class="supported-platforms">
+                Download short videos from Instagram Reels, YouTube Shorts, TikTok, Facebook, Twitter, and more!
+            </p>
+            <form id="downloadForm">
+                <input type="url" id="videoUrl" placeholder="Paste Instagram Reel or short video URL here" required>
+                <button type="submit" id="downloadButton">
+                    <span id="buttonSpinner" class="spinner"></span>
+                    <span id="buttonText">Download Short Video</span>
+                </button>
+            </form>
+            <div id="message"></div>
+        </div>
+
+        <div class="how-to-use">
+            <h2>How to Download Instagram Reels and Short Videos</h2>
+            <ol>
+                <li>Copy the URL of the Instagram Reel or short video you want to download.</li>
+                <li>Paste the URL into the input field above.</li>
+                <li>Click the "Download Short Video" button.</li>
+                <li>Wait for your Instagram Reel or short clip to download.</li>
+            </ol>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions about Downloading Short Videos</h2>
+            <h3>Can I download Instagram Reels for free?</h3>
+            <p>Yes, ClipExtract.com allows you to download Instagram Reels and other short videos completely free of charge, with no registration required.</p>
+            
+            <h3>What types of short videos can I download?</h3>
+            <p>ClipExtract.com supports downloading short videos from various platforms, including Instagram Reels, TikTok videos, YouTube Shorts, and short clips from Facebook, Twitter, and more.</p>
+            
+            <h3>Is it legal to download short videos and Instagram Reels?</h3>
+            <p>ClipExtract.com is designed for personal use only. Always ensure you have the right to download and use the content, and respect copyright laws and terms of service for each platform when downloading short videos or Instagram Reels.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>ClipExtract.com is not affiliated with Instagram, TikTok, YouTube, or any other social media platform. We do not host any media on our servers. All short videos and Instagram Reels are delivered through their original sources and belong to their respective owners.</p>
+        <p>&copy; 2020-24 ClipExtract.com - All Rights Reserved. The #1 tool for downloading Instagram Reels and short videos.</p>
+        <div class="footer-links">
+            <a href="#" id="privacyPolicy">Privacy Policy</a>
+            <a href="#" id="termsConditions">Terms & Conditions</a>
+            <a href="#" id="contactUs">Contact Us</a>
+        </div>
+    </footer>
+
+    <!-- Modal for Privacy Policy -->
+    <div id="privacyPolicyModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div id="privacyPolicyContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Terms & Conditions -->
+    <div id="termsConditionsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Terms & Conditions</h2>
+            <div id="termsConditionsContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Contact Us -->
+    <div id="contactUsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Contact Us</h2>
+            <div id="contactUsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('downloadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const videoUrl = document.getElementById('videoUrl').value;
+            const button = document.getElementById('downloadButton');
+            const buttonText = document.getElementById('buttonText');
+            const buttonSpinner = document.getElementById('buttonSpinner');
+            const messageDiv = document.getElementById('message');
+
+            // Input validation
+            const urlPatterns = {
+                instagram: /^https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/[\w-]+\/?/,
+                youtube: /^https?:\/\/(www\.)?(youtube\.com\/(watch\?v=|shorts\/)|youtu\.be\/)[\w-]+/,
+                facebook: /^https?:\/\/(www\.)?(facebook\.com|fb\.watch)\/.*?(\/videos\/|\/watch\/?\?v=)?\d+/,
+                tiktok: /^https?:\/\/(www\.|vm\.)?tiktok\.com\/(@[\w.-]+\/video\/\d+|\w+\/?)/,
+                twitter: /^https?:\/\/(www\.)?twitter\.com\/\w+\/status\/\d+/,
+                vimeo: /^https?:\/\/(www\.)?vimeo\.com\/\d+/,
+                dailymotion: /^https?:\/\/(www\.)?dailymotion\.com\/video\/\w+/,
+                twitch: /^https?:\/\/(www\.)?twitch\.tv\/\w+(\/clip\/\w+)?/,
+                linkedin: /^https?:\/\/(www\.)?linkedin\.com\/(posts|video)\/.*$/
+            };
+
+            let matchedPlatform = null;
+            for (const [platform, pattern] of Object.entries(urlPatterns)) {
+                if (pattern.test(videoUrl)) {
+                    matchedPlatform = platform;
+                    break;
+                }
+            }
+
+            if (!matchedPlatform) {
+                messageDiv.textContent = 'Error: Please enter a valid video URL from a supported platform.';
+                return;
+            }
+
+            button.disabled = true;
+            buttonText.textContent = 'Downloading...';
+            buttonSpinner.style.display = 'inline-block';
+            messageDiv.textContent = '';
+
+            try {
+                const response = await fetch('/api/download', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: videoUrl }),
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = data.url;
+                    a.download = data.title + '.mp4';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(data.url);
+                    messageDiv.textContent = 'Download started!';
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Download failed');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                messageDiv.textContent = 'Error: ' + error.message;
+            } finally {
+                button.disabled = false;
+                buttonText.textContent = 'Download Short Video';
+                buttonSpinner.style.display = 'none';
+            }
+        });
+
+        // Modal functionality
+        function setupModal(modalId, linkId, content) {
+            var modal = document.getElementById(modalId);
+            var link = document.getElementById(linkId);
+            var span = modal.getElementsByClassName("close")[0];
+            var contentDiv = modal.getElementsByTagName('div')[1];
+
+            link.onclick = function() {
+                modal.style.display = "block";
+                contentDiv.innerHTML = content;
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+
+        // Privacy Policy Content
+        var privacyPolicyContent = `
+            <h3>Privacy Policy for ClipExtract.com</h3>
+            <p>At ClipExtract.com, accessible from https://ClipExtract.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ClipExtract.com and how we use it.</p>
+            <!-- Add the rest of your privacy policy content here -->
+        `;
+
+        // Terms & Conditions Content
+        var termsConditionsContent = `
+            <h3>Terms and Conditions for ClipExtract.com</h3>
+            <p>Welcome to ClipExtract.com! These terms and conditions outline the rules and regulations for the use of ClipExtract.com's Website.</p>
+            <!-- Add the rest of your terms and conditions content here -->
+        `;
+        // Contact Us Content
+        var contactUsContent = `
+            <h3>Contact Us</h3>
+            <p>If you have any questions or concerns regarding our service, please feel free to contact us at: contact@ClipExtract.com</p>
+        `;
+
+        // Setup modals
+        setupModal("privacyPolicyModal", "privacyPolicy", privacyPolicyContent);
+        setupModal("termsConditionsModal", "termsConditions", termsConditionsContent);
+        setupModal("contactUsModal", "contactUs", contactUsContent);
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ClipExtract.com - Instagram Reels and Short Video Downloader",
+      "url": "https://www.ClipExtract.com",
+      "description": "Free online tool to download Instagram Reels, short clips, and videos from various social media platforms.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "featureList": [
+        "Instagram Reels download",
+        "TikTok video download",
+        "YouTube Shorts download",
+        "Short video clips from various platforms"
+      ]
+    }
+    </script>
+</body>
+</html>
